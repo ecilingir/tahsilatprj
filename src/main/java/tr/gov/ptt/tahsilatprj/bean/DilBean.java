@@ -1,4 +1,4 @@
-package tr.ptt.gov.tahsilatprj.bean;
+package tr.gov.ptt.tahsilatprj.bean;
 
 import java.io.Serializable;
 import java.util.Locale;

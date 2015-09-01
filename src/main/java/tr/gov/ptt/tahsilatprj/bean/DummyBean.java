@@ -1,5 +1,5 @@
 
-package tr.ptt.gov.tahsilatprj.bean;
+package tr.gov.ptt.tahsilatprj.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

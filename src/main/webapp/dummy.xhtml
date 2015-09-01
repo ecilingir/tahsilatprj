@@ -11,13 +11,13 @@
             <p:growl />
             <p:panel header="#{msg['tahsilatprj.dummy.panel.header']}">
                 <p:panelGrid columns="3">
-                <p:outputLabel value="#{msg['tahsilatprj.dummy.kullanici']}" />
+                <p:outputLabel value="#{msg['tahsilatprj.dummy.kullanici']}" for="kullanici"/>
                 <p:inputText id="kullanici" value="#{dummyBean.ad}" required="true" >
                     <p:ajax event="keyup" update="kullaniciMsg" />
                 </p:inputText>
                 <p:message id="kullaniciMsg" for="kullanici" />
                 
-                <p:outputLabel value="#{msg['tahsilatprj.dummy.sifre']}" />
+                <p:outputLabel value="#{msg['tahsilatprj.dummy.sifre']}" for="sifre"/>
                 <p:password id="sifre" value="#{dummyBean.sifre}" required="true" >
                     <p:ajax event="keyup" update="sifreMsg" />
                 </p:password>
@@ -27,6 +27,13 @@
                 <p:commandButton value="#{msg['tahsilatprj.dummy.girisButon']}" action="#{dummyBean.sayfayaGit()}" update="@form" />
                 <p:outputLabel />
                 </p:panelGrid>
+                
+                <p:commandLink action="#{dilBean.dilDegistir('tr')}" immediate="true" ajax="false">
+                    <p:graphicImage library="img" name="Turkey.png" />
+                </p:commandLink>
+                <p:commandLink action="#{dilBean.dilDegistir('en')}" immediate="true" ajax="false">
+                    <p:graphicImage library="img" name="English.png" />
+                </p:commandLink>
 
             </p:panel>
         </h:form>
