@@ -15,7 +15,7 @@ import javax.faces.event.ValueChangeEvent;
 @SessionScoped
 public class LanguageBean implements Serializable {
 
-    private String localeCode; 
+    private String localeCode=new String(); 
     
     private static Map<String,Object> ulkeler;
     static {

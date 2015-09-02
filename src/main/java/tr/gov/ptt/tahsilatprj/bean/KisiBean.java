@@ -5,8 +5,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ResourceBundle;
-import javax.faces.application.Application;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -18,21 +16,18 @@ import tr.gov.ptt.tahsilatprj.util.JSFUtil;
 @Named(value = "kisiBean")
 @SessionScoped
 public class KisiBean implements Serializable {
-    
-    
-  //  @ManagedProperty("#{msg}")
-  //  private ResourceBundle mesajlar;
-    
-   
-    
 
-   
     private Kisi kisi = new Kisi();
     
     @Inject
     private KisiService kisiService;
     
+    
     public KisiBean() {
+        kisi.setTema("glass-x");
+        
+        kisi.setKullaniciAd("esra");
+        kisi.setSifre("1234");
     }
 
     public Kisi getKisi() {
@@ -49,11 +44,8 @@ public class KisiBean implements Serializable {
          ResourceBundle backendText = 
                  FacesContext.getCurrentInstance().getApplication().
                          getResourceBundle(FacesContext.getCurrentInstance(), "msg");
-        
-        
        
         Kisi vtKisi = kisiService.girisKontrol(this.kisi);
-        
         if (vtKisi != null) {
             
             this.kisi = vtKisi;
@@ -65,14 +57,11 @@ public class KisiBean implements Serializable {
             return "menu.xhtml";
             
         } else {
-            
+            kisi = new Kisi();
             JSFUtil.hataGoster(backendText.getString("tahsilatprj.giris.loginErrorSummary"), 
                                backendText.getString("tahsilatprj.giris.loginErrorDetail"));
-            return "giris.xhtml";
-        }
-        
-        
-        
+            return "";
+        }  
     }
     
     public String guvenliCikis()

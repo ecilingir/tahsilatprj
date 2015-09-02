@@ -30,7 +30,7 @@
                     <p:outputLabel value="#{msg['tahsilatprj.giris.sifre']}" for="sifre"/>
                     <p:password id="sifre"
                                 value="#{kisiBean.kisi.sifre}"
-                                 required="true">
+                                required="true" redisplay="true">
                         <p:ajax event="keyup" update="sifreMsg"/>
                     </p:password>
                     <p:message id="sifreMsg" for="sifre"/>
