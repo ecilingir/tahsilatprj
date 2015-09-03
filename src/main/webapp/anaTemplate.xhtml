@@ -29,10 +29,10 @@
                                     <p:graphicImage width="120px"  library="img" name="glogo4.png"/>
                                 </td>
                                 <td style="width:60%; " align="center">
-                                    <h1>Rehber Uygulaması</h1>
+                                    <font size="20" color="#CC9933" style="font-family:Comic Sans Serif">Online Tahsilat Uygulaması</font>
                                 </td>
                                 <td style="width:20%; " align="right" valign="top">
-                                    Hoşgeldin #{kisiBean.kisi.ad} #{kisiBean.kisi.soyad}
+                                    <font size="4"  color="#CC9933" style="font-family:Comic Sans Serif">Hoşgeldin #{kisiBean.kisi.ad} #{kisiBean.kisi.soyad} </font>
                                 </td>
                             </tr>
                         </table>
@@ -50,16 +50,19 @@
                           collapsible="true">
                 <ui:insert name="left">
                     <h:form id="menuForm">
-
-                        <p:panelMenu model="#{menuBean.model}" />
-                        <p/>
-
-                        <p:themeSwitcher value="#{kisiBean.kisi.tema}" style="width:170px">
-                            <f:selectItem itemLabel="Tema Seçiniz" itemValue="" />
+                        <p:panel>
+                            <font size="4"  color="#CC9933" style="font-family:Comic Sans Serif" >Temalar
+                            </font>
+                        
+                        <br/>
+                        <p:themeSwitcher  value="#{kisiBean.kisi.tema}" style="width:170px">
+                            <!--<f:selectItem itemLabel="Tema Seçiniz" itemValue="" />-->
                             <f:selectItems value="#{themeBean.temaListesi}" />
                             <p:ajax listener="#{themeBean.temayiKaydet()}" />
                         </p:themeSwitcher>
-
+                        </p:panel>
+                        <p/>
+                        <p:panelMenu model="#{menuBean.model}" />
                     </h:form>
                 </ui:insert>
             </p:layoutUnit>
