@@ -24,7 +24,7 @@ public class KisiBean implements Serializable {
     
     
     public KisiBean() {
-        kisi.setTema("glass-x");
+        kisi.setTema("afterwork");
         
         kisi.setKullaniciAd("esra");
         kisi.setSifre("1234");
