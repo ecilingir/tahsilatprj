@@ -6,6 +6,8 @@
 package tr.gov.ptt.tahsilatprj.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Menu.findBySirano", query = "SELECT m FROM Menu m WHERE m.sirano = :sirano"),
     @NamedQuery(name = "Menu.findByUstmenu", query = "SELECT m FROM Menu m WHERE m.ustmenu = :ustmenu")})
 public class Menu implements Serializable {
-
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -51,14 +52,15 @@ public class Menu implements Serializable {
     @Size(max = 250)
     @Column(name = "LINK")
     private String link;
+    
+    @Size(max = 50)
+    @Column(name = "ICON")
+    private String icon;
+    
     @Column(name = "SIRANO")
     private Integer sirano;
     @Column(name = "USTMENU")
     private Integer ustmenu;
-    @Size(max = 50)
-    @Column(name = "ICON")
-    private String icon;
-
     @JoinTable(name = "THS_MENU_TIP", joinColumns = {
         @JoinColumn(name = "MENUNO", referencedColumnName = "NO")}, inverseJoinColumns = {
         @JoinColumn(name = "TIPNO", referencedColumnName = "NO")})
@@ -71,6 +73,16 @@ public class Menu implements Serializable {
     public Menu(Integer no) {
         this.no = no;
     }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    
+    
 
     public Integer getNo() {
         return no;
@@ -112,14 +124,6 @@ public class Menu implements Serializable {
         this.ustmenu = ustmenu;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-    
     @XmlTransient
     public List<Tip> getTipList() {
         return tipList;
@@ -153,5 +157,5 @@ public class Menu implements Serializable {
     public String toString() {
         return "tr.gov.ptt.tahsilatprj.entity.Menu[ no=" + no + " ]";
     }
-
+    
 }

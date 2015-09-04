@@ -11,6 +11,7 @@ import tr.gov.ptt.tahsilatprj.entity.Borc;
 import tr.gov.ptt.tahsilatprj.entity.Tahsilat;
 import tr.gov.ptt.tahsilatprj.service.BorcService;
 import tr.gov.ptt.tahsilatprj.service.KurumService;
+import tr.gov.ptt.tahsilatprj.service.TahsilatService;
 
 @Named(value = "tahsilatBean")
 @SessionScoped
@@ -22,6 +23,11 @@ public class TahsilatBean implements Serializable {
     KurumService kurumService;
     @Inject
     BorcService borcService;
+    @Inject
+    TahsilatService tahsilatService;
+    @Inject
+    KisiBean kisiBean;
+
     List<Borc> kurumFaturaListesi = new ArrayList<Borc>();
     List<Borc> seciliFaturaListesi = new ArrayList<Borc>();
 
@@ -90,7 +96,7 @@ public class TahsilatBean implements Serializable {
     }
 
     public List<String> kurumAdiTamamla(String p_sorgu) {
-        List<String> kurumAdiListe = kurumService.kurumAdlarınıGetir();
+        List<String> kurumAdiListe = kurumService.kurumAdlariniGetir();
         List<String> sonucListe = new ArrayList<String>();
         for (String kurumAdi : kurumAdiListe) {
             if (kurumAdi.toUpperCase(new Locale("tr", "TR")).contains(p_sorgu.toUpperCase(new Locale("tr", "TR")))) {
@@ -101,7 +107,7 @@ public class TahsilatBean implements Serializable {
     }
 
     public String borcSorgula() {
-        tahsilat.getKurum().setNo(kurumService.KurumAdiIleNoGetir(tahsilat.getKurum().getAd()));
+        tahsilat.getKurum().setNo(kurumService.kurumAdIleNoGetir(tahsilat.getKurum().getAd()));
         kurumFaturaListesi = borcService.borclariGetir(tahsilat.getKurum().getNo(), borc.getAboneNo());
         toplamPara = 0.0;
         alinanPara = 0.0;
@@ -120,5 +126,12 @@ public class TahsilatBean implements Serializable {
 
     public void paraUstuHesapla() {
         paraUstu = alinanPara - toplamPara;
+    }
+
+    public String ode() {
+        
+        tahsilatService.ode(seciliFaturaListesi, kisiBean.getKisi());
+        return "tahsilatSonuc.xhtml?faces-redirect=true";
+
     }
 }

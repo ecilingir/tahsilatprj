@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tr.gov.ptt.tahsilatprj.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,10 +25,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author BEM
- */
+
 @Entity
 @Table(name = "THS_TAHSILAT")
 @XmlRootElement
@@ -48,8 +42,10 @@ public class Tahsilat implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "NO")
-    @SequenceGenerator(name="tahsilatseq",sequenceName = "SEQ_THS_TAHSILAT",initialValue = 1,allocationSize = 1)
-    @GeneratedValue(generator = "tahsilatseq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "tahsilatseq", sequenceName = "SEQ_THS_TAHSILAT", 
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "tahsilatseq", 
+               strategy = GenerationType.SEQUENCE)
     private Integer no;
     @Column(name = "ISLEM_TRH")
     @Temporal(TemporalType.TIMESTAMP)
@@ -58,19 +54,37 @@ public class Tahsilat implements Serializable {
     private Integer kisiIslemsayi;
     @Column(name = "TUTAR")
     private Double tutar;
-    @OneToMany(mappedBy = "tahsilat")
+    
+    @OneToMany(mappedBy = "tahsilat", cascade = CascadeType.ALL)
     private List<TahsilatDetay> tahsilatDetayList;
+    
     @JoinColumn(name = "KURUM_NO", referencedColumnName = "NO")
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     private Kurum kurum;
+    
+    
+    @JoinColumn(name = "KISI_NO", referencedColumnName = "NO")
+    @ManyToOne
+    private Kisi kisi;
 
     public Tahsilat() {
-        kurum=new Kurum();
+        kurum = new Kurum();
+        kisi = new Kisi();
     }
 
     public Tahsilat(Integer no) {
         this.no = no;
     }
+
+    public Kisi getKisi() {
+        return kisi;
+    }
+
+    public void setKisi(Kisi kisi) {
+        this.kisi = kisi;
+    }
+    
+    
 
     public Integer getNo() {
         return no;
@@ -145,5 +159,5 @@ public class Tahsilat implements Serializable {
     public String toString() {
         return "tr.gov.ptt.tahsilatprj.entity.Tahsilat[ no=" + no + " ]";
     }
-    
+
 }

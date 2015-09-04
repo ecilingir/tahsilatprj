@@ -11,14 +11,17 @@ public class KurumService {
     @Inject
     private KurumFacade kurumFacade;
     
-    public List<String> kurumAdlarınıGetir()
+    
+    public List<String> kurumAdlariniGetir()
     {
-      return kurumFacade.kurumAdlarınıGetir();
+        return kurumFacade.kurumAdlariniGetir();
     }
     
-    public Integer KurumAdiIleNoGetir(String p_kurumAdi)
+    public Integer kurumAdIleNoGetir(String p_kurumAdi)
     {
-      return kurumFacade.KurumAdiIleNoGetir(p_kurumAdi);
+       
+        return kurumFacade.kurumAdIleNoGetir(p_kurumAdi);
+        
     }
-    
+
 }

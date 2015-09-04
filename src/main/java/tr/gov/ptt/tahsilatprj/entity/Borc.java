@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tr.gov.ptt.tahsilatprj.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,14 +18,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author BEM
- */
+
 @Entity
 @Table(name = "THS_BORC")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(name = "Borc.kurumBorclariniGetir", 
+ query = "SELECT b FROM Borc b where b.kurum.no=:kurumNo and b.aboneNo=:aboneNo and b.faturaDurum=0 "
+         + "order by b.faturaSonOdemeTrh"),
+         
     @NamedQuery(name = "Borc.findAll", query = "SELECT b FROM Borc b"),
     @NamedQuery(name = "Borc.findByNo", query = "SELECT b FROM Borc b WHERE b.no = :no"),
     @NamedQuery(name = "Borc.findByAboneNo", query = "SELECT b FROM Borc b WHERE b.aboneNo = :aboneNo"),
@@ -38,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Borc.findByFaturaNo", query = "SELECT b FROM Borc b WHERE b.faturaNo = :faturaNo"),
     @NamedQuery(name = "Borc.findByFaturaSonOdemeTrh", query = "SELECT b FROM Borc b WHERE b.faturaSonOdemeTrh = :faturaSonOdemeTrh"),
     @NamedQuery(name = "Borc.findByFaturaTutar", query = "SELECT b FROM Borc b WHERE b.faturaTutar = :faturaTutar"),
-    @NamedQuery(name = "Borc.findByFaturaDurum", query = "SELECT b FROM Borc b WHERE b.faturaDurum = :faturaDurum"),
-    @NamedQuery(name = "Borc.findByKurumBorclariniGetir", query = "SELECT b FROM Borc b WHERE b.faturaDurum = 0 and b.kurum.no= :kurumNo and b.aboneNo= :aboneNo ORDER BY b.faturaSonOdemeTrh")})
+    @NamedQuery(name = "Borc.findByFaturaDurum", query = "SELECT b FROM Borc b WHERE b.faturaDurum = :faturaDurum")})
 public class Borc implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -174,5 +170,5 @@ public class Borc implements Serializable {
     public String toString() {
         return "tr.gov.ptt.tahsilatprj.entity.Borc[ no=" + no + " ]";
     }
-    
+
 }

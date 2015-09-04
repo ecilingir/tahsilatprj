@@ -1,4 +1,3 @@
-
 package tr.gov.ptt.tahsilatprj.facade;
 
 import java.util.List;
@@ -22,13 +21,39 @@ public class KurumFacade extends AbstractFacade<Kurum> {
         super(Kurum.class);
     }
     
-    public List<String> kurumAdlarınıGetir()
+    
+    public List<String> kurumAdlariniGetir()
     {
-      return em.createQuery("SELECT k.ad FROM Kurum k ORDER BY k.ad").getResultList();
+        return em.createQuery("select k.ad from Kurum k order by k.ad").getResultList();    
     }
     
-    public Integer KurumAdiIleNoGetir(String p_kurumAdi)
+    public Integer kurumAdIleNoGetir(String p_kurumAdi)
     {
-      return (Integer) em.createQuery("SELECT k.no FROM Kurum k WHERE k.ad = :ad").setParameter("ad", p_kurumAdi).getSingleResult();
+       
+        Integer kurumNo = (Integer)em.createQuery("SELECT k.no FROM Kurum k WHERE k.ad = :ad")
+                .setParameter("ad", p_kurumAdi)
+                .getSingleResult();
+        
+        return kurumNo;
+        
     }
+    
+    
+    
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

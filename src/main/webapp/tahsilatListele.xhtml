@@ -71,7 +71,7 @@
                             <p:ajax event="keyup" listener="#{tahsilatBean.paraUstuHesapla()}" update="paraustu"/>
                             <f:convertNumber maxFractionDigits="2" />
                         </p:inputText>
-                        <p:commandButton value="ÖDE" update="@form" ajax="false" action="#" />
+                        <p:commandButton value="ÖDE" update="@form" ajax="false" action="#{tahsilatBean.ode()}" />
 
                         <p:outputLabel value="Para Üstü:"/>
                         <p:inputText id="paraustu" value="#{tahsilatBean.paraUstu}" readonly="true" >

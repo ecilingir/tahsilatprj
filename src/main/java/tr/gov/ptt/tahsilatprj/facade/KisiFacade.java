@@ -17,7 +17,6 @@ import tr.gov.ptt.tahsilatprj.entity.Kisi;
  */
 @Stateless
 public class KisiFacade extends AbstractFacade<Kisi> {
-
     @PersistenceContext(unitName = "tr.gov.ptt_TahsilatPrj_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -29,20 +28,24 @@ public class KisiFacade extends AbstractFacade<Kisi> {
     public KisiFacade() {
         super(Kisi.class);
     }
-
-    public Kisi girisKontrol(Kisi p_kisi) {
-        
-        try {
-            Kisi kisi = (Kisi) em.createNamedQuery("Kisi.girisKontrol")
-                    .setParameter("kullaniciAd", p_kisi.getKullaniciAd())
-                    .setParameter("sifre", p_kisi.getSifre())
-                    .getSingleResult();
-
-            return kisi;
-        } catch (NoResultException nre) {
-            return null;
-        }
-
+    
+    public Kisi girisKontrol(Kisi p_kisi)
+    {
+       try
+       {    
+          Kisi kisi = (Kisi)em.createNamedQuery("Kisi.girisKontrol")
+                              .setParameter("kullaniciAd", p_kisi.getKullaniciAd())
+                              .setParameter("sifre", p_kisi.getSifre())
+                              .getSingleResult();
+       
+          return kisi;      
+       }
+       catch(NoResultException nre)
+       {
+          return null;
+       }
+       
     }
-
+    
+    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tr.gov.ptt.tahsilatprj.entity;
 
 import java.io.Serializable;
@@ -25,10 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author BEM
- */
+
 @Entity
 @Table(name = "THS_TAHSILAT_DETAY")
 @XmlRootElement
@@ -46,8 +38,10 @@ public class TahsilatDetay implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "NO")
-     @SequenceGenerator(name="tahsilatdetayseq",sequenceName = "SEQ_THS_TAHSILAT_DETAY",initialValue = 1,allocationSize = 1)
-    @GeneratedValue(generator = "tahsilatdetayseq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "tahsilatdetayseq", sequenceName = "SEQ_THS_TAHSILAT_DETAY", 
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "tahsilatdetayseq", 
+               strategy = GenerationType.SEQUENCE)
     private Integer no;
     @Column(name = "TUTAR")
     private Double tutar;
@@ -60,6 +54,7 @@ public class TahsilatDetay implements Serializable {
     @Column(name = "FATURA_SON_ODEME_TRH")
     @Temporal(TemporalType.TIMESTAMP)
     private Date faturaSonOdemeTrh;
+   
     @JoinColumn(name = "TAHSILAT_NO", referencedColumnName = "NO")
     @ManyToOne
     private Tahsilat tahsilat;
@@ -143,5 +138,5 @@ public class TahsilatDetay implements Serializable {
     public String toString() {
         return "tr.gov.ptt.tahsilatprj.entity.TahsilatDetay[ no=" + no + " ]";
     }
-    
+
 }

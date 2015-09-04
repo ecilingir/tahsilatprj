@@ -10,11 +10,15 @@ import tr.gov.ptt.tahsilatprj.facade.BorcFacade;
 public class BorcService {
     
     @Inject
-    BorcFacade borcFacade;
-
-    public List<Borc> borclariGetir(Integer p_kurum_no, String p_abone_no) {
-        return borcFacade.borclariGetir(p_kurum_no, p_abone_no);
-        
-    }
+    private BorcFacade borcFacade;
     
+    
+    
+    public List<Borc> borclariGetir(Integer p_kurumNo, String p_aboneNo)
+    {
+        
+        return borcFacade.borclariGetir(p_kurumNo, p_aboneNo);
+    
+    }
+
 }

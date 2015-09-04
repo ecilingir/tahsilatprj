@@ -4,7 +4,9 @@ package tr.gov.ptt.tahsilatprj.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -62,6 +65,10 @@ public class Kisi implements Serializable {
     private Date dogtar;
     @Column(name = "MAAS")
     private Double maas;
+    
+    @Column(name = "ISLEMSAYI")
+    private Integer islemSayi;
+    
     @Size(max = 50)
     @Column(name = "TEMA")
     private String tema;
@@ -74,6 +81,9 @@ public class Kisi implements Serializable {
     @JoinColumn(name = "TIPNO", referencedColumnName = "NO")
     @ManyToOne
     private Tip tip;
+    
+    @OneToMany(mappedBy = "kisi", cascade = CascadeType.ALL)
+    private List<Tahsilat> tahsilatList;
 
     public Kisi() {
         tip = new Tip();
@@ -82,6 +92,26 @@ public class Kisi implements Serializable {
     public Kisi(Integer no) {
         this.no = no;
     }
+
+    public Integer getIslemSayi() {
+        return islemSayi;
+    }
+
+    public void setIslemSayi(Integer islemSayi) {
+        this.islemSayi = islemSayi;
+    }
+    
+    
+
+    public List<Tahsilat> getTahsilatList() {
+        return tahsilatList;
+    }
+
+    public void setTahsilatList(List<Tahsilat> tahsilatList) {
+        this.tahsilatList = tahsilatList;
+    }
+    
+    
 
     public Integer getNo() {
         return no;
